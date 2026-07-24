@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz | Malaysian Street Food</title>
+<link rel="stylesheet" href="quiz.css">
+<link rel="stylesheet" href="../nav.css">
+<style>
+  /* Full-page background image for quiz */
+  body {
+    background-image: url('images/quiz.jpg');
+    background-size: cover;   /* Fill screen */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* optional */
+  }
+
+  /* START QUIZ button styling */
+  #startBtn {
+    background: #e85c1e;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    display: block;
+    margin: 20px auto 0;
+    font-size: 1rem;
+  }
+
+  #startBtn:hover {
+    background: #d24d12;
+    transform: scale(1.03);
+  }
+
+  /* Progress bar */
+  #quiz-progress {
+    display: none;
+    width: 100%;
+    background: #ffe6cc;
+    height: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+  }
+
+  #quiz-progress-inner {
+    height: 100%;
+    background: #e85c1e;
+    width: 0%;
+    border-radius: 6px;
+    transition: width 0.3s ease;
+  }
+</style>
+
+<script>
+  const quizQuestions = [
+  {
+    question: "1. What is the main ingredient used to make 'Otak-Otak'?",
+    options: ["Fish", "Chicken", "Tofu"],
+    answer: "Fish",
+    image: "images/otak.jpg"
+  },
+  {
+    question: "2. 'Nasi Lemak' is traditionally served with which condiment?",
+    options: ["Soy Sauce", "Sambal", "Curry"],
+    answer: "Sambal",
+    image: "images/nasilemak.jpg"
+  },
+  {
+    question: "3. 'Apam Balik' is best described as what type of food?",
+    options: ["Fried noodles", "Rice porridge", "Stuffed pancake"],
+    answer: "Stuffed pancake",
+    image: "images/apam.jpg"
+  },
+  {
+    question: "4. 'Mee Goreng' is commonly stir-fried with which type of noodles?",
+    options: ["Yellow noodles", "Rice vermicelli", "Glass noodles"],
+    answer: "Yellow noodles",
+    image: "images/meegoreng.jpg"
+  },
+  {
+    question: "5. 'Bak Kut Teh' is a soup dish traditionally made with which meat?",
+    options: ["Pork", "Beef", "Chicken"],
+    answer: "Pork",
+    image: "images/bakkuhteh.jpg"
+  },
+  {
+    question: "6. The dough for 'Roti Canai' is made mainly from what ingredient?",
+    options: ["Rice", "Flour", "Cornmeal"],
+    answer: "Flour",
+    image: "images/Roti_Canai.jpg"
+  },
+  {
+    question: "7. 'Asam Laksa' has a broth that is mainly what flavor?",
+    options: ["Mild and salty", "Sweet and creamy", "Sour and spicy"],
+    answer: "Sour and spicy",
+    image: "images/asamlaksa.jpg"
+  },
+  {
+    question: "8. 'Satay' is usually served with which dipping sauce?",
+    options: ["Chili ketchup", "Soy sauce", "Peanut sauce"],
+    answer: "Peanut sauce",
+    image: "images/satay.jpg"
+  },
+  {
+    question: "9. 'Cendol' gets its green color from what ingredient?",
+    options: ["Green tea", "Pandan leaves", "Spinach"],
+    answer: "Pandan leaves",
+    image: "images/cendol.jpg"
+  },
+  {
+    question: "10. The 'Ramly Burger' is most commonly sold at?",
+    options: ["Street food stalls", "Luxury hotels", "Airports"],
+    answer: "Street food stalls",
+    image: "images/ramly.jpg"
+  },
+  {
+    question: "11. 'Fruit Rojak' is a salad that usually combines fruit with which type of sauce?",
+    options: ["Soy sauce", "Shrimp paste sauce", "Peanut sauce"],
+    answer: "Shrimp paste sauce",
+    image: "images/rojak.jpg"
+  },
+  {
+    question: "12. 'Char Kuey Teow' is typically stir-fried with which key ingredient?",
+    options: ["Flat rice noodles", "Thick yellow noodles", "Udon noodles"],
+    answer: "Flat rice noodles",
+    image: "images/charkueyteow.jpg"
+  },
+];
+
+let currentQuestion = 0;
+let userAnswers = JSON.parse(localStorage.getItem("quizAnswers")) || Array(quizQuestions.length).fill(null);
+let lastScore = localStorage.getItem("quizScore");
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  if (lastScore !== null) {
+    alert(`📌 Welcome back! Your last quiz score was: ${lastScore}/${quizQuestions.length}`);
+  }
+});
+
+function startQuiz() {
+  document.getElementById("intro").style.display = "none";
+  document.getElementById("quiz-progress").style.display = "block";
+  showQuestion();
+}
+
+function updateProgress() {
+  const percent = ((currentQuestion + 1) / quizQuestions.length) * 100;
+  document.getElementById("quiz-progress-inner").style.width = percent + '%';
+}
+
+function showQuestion() {
+  updateProgress();
+  const q = quizQuestions[currentQuestion];
+
+  document.getElementById("question-counter").innerText =
+    `Question ${currentQuestion + 1} out of ${quizQuestions.length}`;
+
+  const quizDiv = document.getElementById("quiz-container");
+
+  let html = `<p><strong>${q.question}</strong></p>`;
+  if (q.image) {
+    html += `<img src="${q.image}" alt="Question Image" 
+              style="max-width:300px; display:block; margin:10px auto; border-radius:8px;">`;
+  }
+
+  q.options.forEach((opt) => {
+    const checked = userAnswers[currentQuestion] === opt ? "checked" : "";
+    html += `<label class="quiz-option">
+              <input type="radio" name="option" value="${opt}" ${checked}>
+              <span>${opt}</span>
+              </label>`;
+  });
+
+  html += `<div style="margin-top:15px; text-align:center;">`;
+  if (currentQuestion > 0) html += `<button onclick="prevQuestion()">Previous</button> `;
+  html += `<button onclick="nextQuestion()">${currentQuestion === quizQuestions.length - 1 ? "Submit" : "Next"}</button>`;
+  html += `</div>`;
+
+  quizDiv.innerHTML = html;
+}
+
+function nextQuestion() {
+  const selected = document.querySelector('input[name="option"]:checked');
+  if (!selected) {
+    alert("Please select an answer before continuing!");
+    return;
+  }
+  userAnswers[currentQuestion] = selected.value;
+  localStorage.setItem("quizAnswers", JSON.stringify(userAnswers)); // ✅ 即時存答案
+
+  if (currentQuestion === quizQuestions.length - 1) {
+    showResult();
+  } else {
+    currentQuestion++;
+    showQuestion();
+  }
+}
+
+function prevQuestion() {
+  currentQuestion--;
+  showQuestion();
+}
+
+function showResult() {
+  let score = 0;
+  for (let i = 0; i < quizQuestions.length; i++) {
+    if (userAnswers[i] === quizQuestions[i].answer) score++;
+  }
+
+  // Save the marks
+  localStorage.setItem("quizScore", score);
+
+  const quizDiv = document.getElementById("quiz-container");
+  let message = "";
+  let boxClass = "";
+
+  if (score === quizQuestions.length) {
+    message = `🎉 Perfect score! You got ${score}/${quizQuestions.length}!`;
+    boxClass = "perfect";
+  } else if (score >= 7) {
+    message = `👍 Great job! You got ${score}/${quizQuestions.length}!`;
+    boxClass = "great";
+  } else if (score >= 4) {
+    message = `🙂 Not bad! You got ${score}/${quizQuestions.length}!`;
+    boxClass = "okay";
+  } else {
+    message = `😅 Better luck next time! You got ${score}/${quizQuestions.length}!`;
+    boxClass = "bad";
+  }
+
+  quizDiv.innerHTML = `
+    <div class="result-box ${boxClass}">
+      <h2>Quiz Finished!</h2>
+      <p>${message}</p>
+    </div>
+  `;
+
+  document.getElementById("quiz-progress").style.display = "none";
+
+  setTimeout(() => {
+    document.getElementById("retry-modal").style.display = "flex";
+  }, 500);
+}
+
+function restartQuiz() {
+  userAnswers = Array(quizQuestions.length).fill(null);
+  currentQuestion = 0;
+  localStorage.removeItem("quizAnswers");   
+  localStorage.removeItem("quizScore");     
+  document.getElementById("quiz-progress").style.display = "block";
+  document.getElementById("quiz-progress-inner").style.width = "0%";
+  document.getElementById("retry-modal").style.display = "none";
+  showQuestion();
+}
+
+// Modal button events
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("yes-btn").addEventListener("click", restartQuiz);
+  document.getElementById("no-btn").addEventListener("click", () => {
+    document.getElementById("retry-modal").style.display = "none";
+  });
+});
+</script>
+</head>
+<body>
+
+<header>
+  <h1>Malaysian Street Food</h1>
+</header>
+
+    <!-- menu -->
+    <button class="menu-toggle" id="menuToggle">☰</button>
+
+    <!-- Navigation -->
+    <div class="sidebar" id="sidebar">
+        <a href="../index/index.html">Home</a>
+        <a href="../about/about.html">About</a>
+        <a href="../topdishes/topdishes.html">Top Dishes</a>
+        <a href="../gallery/gallery.html">Gallery</a>
+        <a href="../recipe/recipe.html">Recipe</a>
+        <a href="../location/location.html">Location</a>
+        <a href="../quiz/quiz.html">Quiz</a>
+        <a href="../contact/contact.html">Contact</a>
+        <a href="../event/event.html">Event</a>
+        <a href="../faqs/faqs.html">FAQs</a>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+<main>
+  <section class="quiz-container">
+    <div id="intro" class="framed-section">
+      <p style="font-size:1.2rem; line-height:1.8; text-align:center; color:#4a2f1b;">
+        🍜 <span style="font-size:1.5rem; color:#e85c1e; font-weight:bold;">Welcome!</span> <br>
+        Ready to test your knowledge about <span style="color:#b22222; font-weight:bold;">Malaysian Street Food</span>? <br>
+        From <span style="color:#8b0000;">Nasi Lemak</span> to <span style="color:#8b0000;">Char Kway Teow</span>, see how many facts you know! <br>
+        Click the <span style="color:#e85c1e; font-weight:bold;">START QUIZ</span> button below and answer each question one by one. <br>
+        Good luck and have fun! 🎉
+      </p>
+      <button id="startBtn" onclick="startQuiz()">START QUIZ</button>
+    </div>
+
+    <!-- Progress Bar and Question Counter -->
+    <div id="quiz-header" style="text-align:center; margin-bottom:15px;">
+      <p id="question-counter" style="font-weight:bold; font-size:1.1rem; color:#4a2f1b;">
+      </p>
+    <div id="quiz-progress">
+    <div id="quiz-progress-inner"></div>
+    </div>
+    </div>
+
+    <!-- Quiz Questions will appear here -->
+    <div id="quiz-container"></div>
+
+    <!-- Retry Quiz Modal -->
+    <div id="retry-modal" class="modal">
+      <div class="modal-content">
+        <h3>Do you want to retry the quiz?</h3>
+        <button id="yes-btn" class="modal-btn yes">Yes</button>
+        <button id="no-btn" class="modal-btn no">No</button>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 Malaysian Street Food. All rights reserved.
+</footer>
+
+<script src="../whole.js"></script>
+
+</body>
+</html>

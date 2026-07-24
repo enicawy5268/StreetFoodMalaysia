@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../nav.css">
+    <link rel="stylesheet" href="topdishes.css">
+    <style>
+        .color_subtitle {
+            font-size: 30px;
+            color: goldenrod;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>About Char Kway Teow</h1>
+    </header>
+
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <div class="sidebar" id="sidebar">
+        <a href="../index/index.html">Home</a>
+        <a href="../about/about.html">About</a>
+        <a href="../topdishes/topdishes.html">Top Dishes</a>
+        <a href="../gallery/gallery.html">Gallery</a>
+        <a href="../recipe/recipe.html">Recipe</a>
+        <a href="../location/location.html">Location</a>
+        <a href="../quiz/quiz.html">Quiz</a>
+        <a href="../contact/contact.html">Contact</a>
+        <a href="../event/event.html">Event</a>
+        <a href="../faqs/faqs.html">FAQs</a>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <h2 class="hd1">
+        <a href="topdishes.html" class="backlink">&larr; Back</a>
+        <span class="title-text">Background and History</span>
+    </h2>
+    <p class="word">
+        Char Kway Teow, a popular Malaysian and Singaporean noodle dish, originally developed and catered to
+        overseas-born Chinese labourers in the Southeast Asia region, the dish has achieved widespread popularity within
+        the region from the late 20th century onwards, particularly in Malaysia and Singapore. The dish has also
+        acquired a reputation of being unhealthy due to its high saturated fat content, as it is traditionally
+        stir-fried in pork fat with crisp croutons of pork lard.
+
+        <br><br>
+
+        In Penang, one of Malaysia’s famous food capitals, Char Kway Teow is traditionally fried using duck eggs, which
+        gives the dish a richer flavor and silkier texture due to the higher fat content of duck eggs. This is
+        considered a signature touch of Penang-style Char Kuey Teow.
+
+        In contrast, in most other regions of Malaysia or Singapore, the dish is more commonly prepared using chicken
+        eggs, which are milder in taste and more widely available. While both versions are delicious, Penang’s use of
+        duck eggs is often praised by food lovers as a premium or more authentic version.
+
+        <br><br>
+
+        The dish was often sold by fishermen, farmers and cockle-gatherers who doubled as char kway teow hawkers in the
+        evening to supplement their income. The high fat content and low cost of the dish made it attractive to these
+        people as it was a cheap source of energy and nutrients.
+
+        <br><br>
+
+        The term "char kway teow" is a transliteration of the Chinese characters 炒粿條 (in simplified Chinese 炒粿条). The
+        dish's name is Hokkien (chhá-kóe-tiâu?), but the dish may have its roots in Chaozhou in China's Guangdong
+        province and is mostly associated with the Teochew. The word kóe-tiâu (literally meaning "ricecake strips")
+        generally refers to flat rice noodles, which are the usual ingredient in Singapore and West Malaysia. There is
+        no fixed way of spelling chhá-kóe-tiâu, and many variants can be found: examples include "char kueh teow", "char
+        kuey teow", "char koay teow", "char kueh tiao", "char kuay tiaw", "char kueh tiaw" and so on.
+
+        <br><br>
+
+        Owing to the dish's popularity and spread to Cantonese-speaking areas, the term "char kway teow" has been
+        corrupted into "炒貴刁" (Cantonese Yale: cháau gwai dīu; pinyin: cháo guì diāo) when presented in the
+        aforementioned areas. The term "貴刁" has no real meaning, but its pronunciation in Cantonese and Mandarin is
+        similar to "粿條" in Min Nan.
+
+        <br><br>
+    </p>
+
+    <h2 class="hd2">Price and Ingredient</h2>
+    <div class="ingredients-section">
+        <!-- Left: Ingredients -->
+        <div class="ingredients-list">
+            <p class="word-rate">Current <b>1 USD</b> to <b>MYR</b> rate: <span id="exchangeRate">Loading...</span></p>
+            <script src="exchangeRate.js"></script>
+            <p class="word1">
+                <br>
+                Basic price of Char Kuey Teow in:
+            </p>
+            <ul>
+                <li>Penang (with <i>duck eggs</i>) --> RM8 - RM10</li>
+                <li>Kuala Lumpur / Selangor --> RM7 - RM9</li>
+                <li>Other states --> RM6 - RM10</li>
+            </ul>
+
+            <p class="word1">
+                The basic ingredients used in:
+            </p>
+
+            <span class="color_subtitle">Malay style:</span>
+            <ul>
+                <li>Kway Teow</li>
+                <li>eggs</li>
+                <li>bean sprouts</li>
+                <li>spring onions</li>
+                <li>slices of sausage or crab stick</li>
+                <li>chicken cubes</li>
+            </ul>
+
+            <span class="color_subtitle">Chinese style:</span>
+            <ul>
+                <li>Kway teow</li>
+                <li>prawns</li>
+                <li>chinese sausage (<i>lap cheong</i>)</li>
+                <li>bean sprouts</li>
+                <li>eggs/duck eggs</li>
+                <li>garlic chives</li>
+                <li>fish cakes</li>
+                <li>blood clams (<i>siham</i>) </li>
+            </ul>
+        </div>
+
+        <!-- Right: Image -->
+        <div class="ingredients-image">
+            <img src="food/charkwayteow2.jpeg" alt="Char Kway Teow">
+        </div>
+    </div>
+
+
+    <span class="word-rate">Tried this food? Give it a rating!<br /></span>
+    <div class="star-rating" onclick="saveRating(event)">
+        <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+        <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+        <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+        <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+        <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+    </div>
+
+    <p id="printmsg" class="word-rate"></p>
+
+    <script src="../whole.js"></script>
+    <script>
+        // Save rating when clicked
+        function saveRating(event) {
+            if (event.target.tagName === "INPUT") {
+                let rating1 = event.target.value;
+                sessionStorage.setItem("starRating1", rating1);
+                document.getElementById("printmsg").textContent =
+                    "Thanks for rating!😊😊 You gave " + rating1 + " stars.";
+            }
+        }
+
+        // Load rating when page reloads
+        window.onload = function () {
+            let savedRating = sessionStorage.getItem("starRating1");
+            if (savedRating) {
+                // Check the radio button that was saved
+                document.getElementById("star" + savedRating).checked = true;
+                document.getElementById("printmsg").textContent =
+                    "Welcome back! You previously rated " + savedRating + " stars.";
+            }
+        }
+    </script>
+
+</body>
+<footer>
+    <p>&copy; 2025 Explore Malaysian Street Food. All Rights Reserved.</p>
+</footer>

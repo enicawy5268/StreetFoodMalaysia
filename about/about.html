@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us | Malaysian Street Food</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="about.css">
+  <link rel="stylesheet" href="../nav.css">
+</head>
+
+<button id="backToTop" title="Go to top"> ↑ </button>
+
+<body>
+
+    <!-- Visit info banner will show visit count & last visit -->
+  <div id="visitBanner"></div>
+
+  <header>
+    <h1>Malaysian Street Food</h1>
+  </header>
+
+  <!-- menu -->
+  <button class="menu-toggle" id="menuToggle">☰</button>
+
+  <!-- Navigation -->
+  <div class="sidebar" id="sidebar">
+      <a href="../index/index.html">Home</a>
+      <a href="../about/about.html">About</a>
+      <a href="../topdishes/topdishes.html">Top Dishes</a>
+      <a href="../gallery/gallery.html">Gallery</a>
+      <a href="../recipe/recipe.html">Recipe</a>
+      <a href="../location/location.html">Location</a>
+      <a href="../quiz/quiz.html">Quiz</a>
+      <a href="../contact/contact.html">Contact</a>
+      <a href="../event/event.html">Event</a>
+      <a href="../faqs/faqs.html">FAQs</a>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+
+  <main>
+    <!-- Fun Facts Counter Section -->
+    <section class="fun-facts">
+      <h2>Fun Facts About Us</h2>
+      <div class="facts-container">
+        <div class="fact">
+          <span class="counter" data-target="120">0</span>
+          <p>Street Foods Tried</p>
+        </div>
+        <div class="fact">
+          <span class="counter" data-target="15">0</span>
+          <p>States Explored</p>
+        </div>
+        <div class="fact">
+          <span class="counter" data-target="5">0</span>
+          <p>Years Sharing Food Stories</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section with Grid Images -->
+    <section class="about-section">
+      <div class="about-content">
+        <!-- Left: Image Grid -->
+        <div class="image-grid">
+          <img src="images/3d.jpg" alt="Food 1" />
+          <img src="images/apam.jpg" alt="Food 2" />
+          <img src="images/claypot.jpg" alt="Food 3" />
+          <img src="images/street-food-in-malaysia-1-1.jpg" alt="Food 4" />
+        </div>
+
+        <!-- Right: Text -->
+        <div class="text">
+          <h2>About Us</h2>
+          <p>
+            Welcome to <strong>Malaysian Street Food</strong>, your ultimate guide to the vibrant, flavorful, and diverse street food scene across Malaysia.  
+            We believe that every street corner has its own story to tell — through sizzling woks, aromatic spices, and the warm smiles of the vendors who dedicate their lives to their craft.  
+            From bustling night markets to hidden roadside gems, our mission is to explore and celebrate the rich culinary traditions that make Malaysia one of the world’s most exciting food destinations.  
+            Our journey takes us deep into the heart of local communities, tasting everything from the sweet and fluffy <em>apam balik</em> to the smoky, irresistible <em>satay</em>, all while sharing the stories behind the dishes.
+          </p>
+
+          <h2>Our Vision</h2>
+          <p>
+            We aim to become the go-to digital hub for everything related to Malaysian street food — a place where food lovers, travelers, and locals alike can discover, learn, and connect.  
+            By blending storytelling with mouthwatering photography and authentic experiences, we want to inspire a new appreciation for the cultural heritage hidden within each bite.  
+            Our vision is not just to document food, but to preserve the traditions, values, and passions of the people who keep Malaysia’s street food alive.  
+            We believe that by sharing these flavors with the world, we can bridge cultures, spark conversations, and keep the heart of Malaysian food culture beating for generations to come.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Timeline Section with Scroll Animation -->
+    <section class="timeline-section">
+      <h2 class="timeline-title">Our Journey</h2>
+      <div class="timeline">
+        <div class="timeline-item left animate">
+          <div class="content">
+            <h3>The Beginning</h3>
+            <p>Our founders discovered the magic of Malaysian street food and began their mission to share it with the world.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item right animate">
+          <div class="content">
+            <h3>First Website Launch</h3>
+            <p>We launched our first street food guide site for food lovers in 2023.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item left animate">
+          <div class="content">
+            <h3>Expanded Team</h3>
+            <p>We grew our team with passionate writers, photographers, and developers.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item right animate">
+          <div class="content">
+            <h3>Going International</h3>
+            <p>We featured in several international food blogs and began collaborating globally.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Meet the Team Section -->
+    <section class="team-section">
+      <h2>Meet Our Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <img src="images/kaijie.png" alt="Kai Jie - Food Blogger">
+          <h3>Kai Jie</h3>
+          <p>Food Blogger</p>
+        </div>
+        <div class="team-member">
+          <img src="images/wingyeng.png" alt="Wing Yeng - Photographer">
+          <h3>Wing Yeng</h3>
+          <p>Photographer & Content Creator</p>
+        </div>
+        <div class="team-member">
+          <img src="images/puisan.png" alt="Pui San - Writer">
+          <h3>Pui San</h3>
+          <p>Writer</p>
+        </div>
+        <div class="team-member">
+          <img src="images/yanzhuo.png" alt="Yan Zhuo - Recipe Curator">
+          <h3>Yan Zhuo</h3>
+          <p>Recipe Curator</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Malaysian Street Food. All rights reserved.
+  </footer>
+
+  <!-- JavaScript for Scroll Animation, Counter & Storage -->
+  <script>
+  // ===== Scroll Animation for Timeline =====
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.timeline-item').forEach(item => observer.observe(item));
+
+  // ===== Counter Animation =====
+  const counters = document.querySelectorAll('.counter');
+  const speed = 200; 
+
+  counters.forEach(counter => {
+    const updateCount = () => {
+      const target = +counter.getAttribute('data-target');
+      const count = +counter.innerText;
+      const increment = target / speed;
+
+      if(count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(updateCount, 20);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    updateCount();
+  });
+ 
+  // ===== Back to Top Button =====
+  const backToTopBtn = document.getElementById("backToTop");
+
+  window.onscroll = function() {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+      backToTopBtn.style.display = "block";
+    } else {
+      backToTopBtn.style.display = "none";
+    }
+  };
+
+  backToTopBtn.addEventListener("click", () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ===== Storage Example =====
+  // Get previous visit count from localStorage
+  let visitCount = localStorage.getItem("aboutVisitCount");
+  if (!visitCount) {
+    visitCount = 1; // first visit
+  } else {
+    visitCount = parseInt(visitCount) + 1;
+  }
+  localStorage.setItem("aboutVisitCount", visitCount);
+
+  // Get last visit time from localStorage (not sessionStorage)
+  let lastVisit = localStorage.getItem("aboutLastVisit");
+  let currentVisit = new Date().toLocaleString();
+  localStorage.setItem("aboutLastVisit", currentVisit);
+
+  // Update banner at the top of the page
+  const banner = document.getElementById("visitBanner");
+  banner.innerHTML = `You have visited this page <strong>${visitCount}</strong> times. 
+  Last visit: <strong>${lastVisit ? lastVisit : "This is your first visit!"}</strong>`; 
+  </script>
+
+  <script src="../whole.js"></script>
+  
+</body>
+</html>

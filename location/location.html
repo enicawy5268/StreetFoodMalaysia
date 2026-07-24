@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Location - Malaysian Street Food</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Leaflet (你原有的) -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
+  <style>
+    body { margin: 0 !important; overflow-x: hidden !important; }
+
+    .location-header {
+      padding: 0 !important;
+      margin: 0 !important;
+      border: 0 !important;
+      background: transparent !important;
+    }
+
+    .map-banner {
+      background: linear-gradient(rgba(0,0,0,0.25), rgba(0,0,0,0.25)),
+                  url('image/MalaysiaMap.jpg') center/cover no-repeat !important;
+      height: 250px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+
+      width: 100vw !important;
+      max-width: none !important;
+      margin-left: calc(50% - 50vw) !important;
+      margin-right: calc(50% - 50vw) !important;
+
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .map-banner h1 {
+      color: #fff;
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+      margin: 0;
+      border: none;
+      padding: 0;
+    }
+
+    #map {
+      height: 420px;
+      width: 100vw; max-width: none;
+      margin-left: calc(50% - 50vw);
+      margin-right: calc(50% - 50vw);
+    }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
+      padding: 20px;
+    }
+
+    .location-card {
+      background-color: #fff8dc;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 15px;
+      transition: transform 0.3s ease;
+    }
+
+    .location-card:hover { transform: scale(1.05); }
+
+    .location-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .search-box {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .search-box input {
+      width: 300px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .search-box button {
+      padding: 10px 15px;
+      margin-left: 10px;
+      font-size: 1rem;
+      background-color: #f57c00;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .search-box button:hover { background-color: #ef6c00; }
+
+    .menu-toggle {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      font-size: 2rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: #333;
+      z-index: 1001;
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: -250px;
+      width: 250px;
+      height: 100%;
+      background: #fff8dc;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.2);
+      padding-top: 60px;
+      transition: left 0.3s ease;
+      z-index: 1000;
+    }
+
+    .sidebar.active { left: 0; }
+
+    .sidebar a {
+      display: block;
+      padding: 12px 20px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .sidebar a:hover { background: #ffe4b5; }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.4);
+      display: none;
+      z-index: 999;
+    }
+
+    .overlay.active { display: block; }
+  </style>
+</head>
+
+<body>
+  <!-- menu -->
+  <button class="menu-toggle" id="menuToggle">☰</button>
+
+  <div class="sidebar" id="sidebar">
+    <a href="../index/index.html">Home</a>
+    <a href="../about/about.html">About</a>
+    <a href="../topdishes/topdishes.html">Top Dishes</a>
+    <a href="../location/location.html">Location</a>
+    <a href="../quiz/quiz.html">Quiz</a>
+    <a href="../contact/contact.html">Contact</a>
+    <a href="../gallery/gallery.html">Gallery</a>
+    <a href="../recipe/recipe.html">Recipe</a>
+    <a href="../event/event.html">Event</a>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+
+  <header class="location-header">
+    <div class="map-banner">
+      <h1>Explore by Location</h1>
+    </div>
+  </header>
+
+  <div id="map"></div>
+
+  <!-- Search Location -->
+  <main>
+    <div class="search-box">
+      <input type="text" id="mapSearchInput" placeholder="Search for street food...">
+      <button onclick="searchOnMap()">🔍 Search</button>
+      <button onclick="openNearbyFood()">📍 Nearby</button>
+    </div>
+
+    <h2 style="text-align:center; margin-top: 20px;">Famous Foods by State</h2>
+
+    <section class="location-grid" id="locationCards">
+      <div class="location-card">
+        <img src="image/Hokkien Mee.jpg" alt="Hokkien Mee">
+        <h3>Penang – Hokkien Mee</h3>
+        <p>⭐ 4.8 / 5</p>
+      </div>
+      <div class="location-card">
+        <img src="image/satay.jpg" alt="Satay">
+        <h3>Kuala Lumpur – Satay</h3>
+        <p>⭐ 4.7 / 5</p>
+      </div>
+      <div class="location-card">
+        <img src="image/laksa.jpg" alt="Nyonya Laksa">
+        <h3>Melaka – Nyonya Laksa</h3>
+        <p>⭐ 4.6 / 5</p>
+      </div>
+      <div class="location-card">
+        <img src="image/Nasi Ulam.jpg" alt="Nasi Ulam">
+        <h3>Kedah – Nasi Ulam</h3>
+        <p>⭐ 4.5 / 5</p>
+      </div>
+      <div class="location-card">
+        <img src="image/Mee Rebus.jpg" alt="Mee Rebus">
+        <h3>Johor – Mee Rebus</h3>
+        <p>⭐ 4.4 / 5</p>
+      </div>
+      <div class="location-card">
+        <img src="image/Nga Choi Kai.jpg" alt="Nga Choi Kai">
+        <h3>Perak – Nga Choi Kai</h3>
+        <p>⭐ 4.6 / 5</p>
+      </div>
+      <div class="location-card">
+        <img src="image/Kolo Mee.jpg" alt="Kolo Mee">
+        <h3>Sarawak – Kolo Mee</h3>
+        <p>⭐ 4.7 / 5</p>
+      </div>
+      <div class="location-card">
+        <img src="image/Nasi Kerabu.jpg" alt="Nasi Kerabu">
+        <h3>Kelantan – Nasi Kerabu</h3>
+        <p>⭐ 4.6 / 5</p>
+      </div>
+      <div class="location-card">
+        <img src="image/Keropok Lekor.jpg" alt="Keropok Lekor">
+        <h3>Terengganu – Keropok Lekor</h3>
+        <p>⭐ 4.4 / 5</p>
+      </div>
+      <div class="location-card">
+        <img src="image/Sang Nyuk Mee.jpg" alt="Sang Nyuk Mee">
+        <h3>Sabah – Sang Nyuk Mee</h3>
+        <p>⭐ 4.5 / 5</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; Malaysian Street Food.</p>
+  </footer>
+
+  <script>
+    // Sidebar toggle
+    var menuToggle = document.getElementById("menuToggle");
+    var sidebar = document.getElementById("sidebar");
+    var overlay = document.getElementById("overlay");
+    menuToggle.addEventListener("click", function () {
+      sidebar.classList.toggle("active");
+      overlay.classList.toggle("active");
+    });
+    overlay.addEventListener("click", function () {
+      sidebar.classList.remove("active");
+      overlay.classList.remove("active");
+    });
+
+    // Leaflet map setup
+    var map = L.map('map', { scrollWheelZoom: true }).setView([4.2105, 101.9758], 6);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Markers for famous foods
+    var markers = L.layerGroup().addTo(map);
+    [
+      { name: 'Penang – Hokkien Mee', lat: 5.4141, lon: 100.3288 },
+      { name: 'Kuala Lumpur – Satay', lat: 3.1390, lon: 101.6869 },
+      { name: 'Melaka – Nyonya Laksa', lat: 2.1896, lon: 102.2501 },
+      { name: 'Kedah – Nasi Ulam', lat: 6.1184, lon: 100.3685 },
+      { name: 'Johor – Mee Rebus', lat: 1.4927, lon: 103.7414 },
+      { name: 'Perak – Nga Choi Kai', lat: 4.5975, lon: 101.0901 },
+      { name: 'Sarawak – Kolo Mee', lat: 1.5533, lon: 110.3592 },
+      { name: 'Kelantan – Nasi Kerabu', lat: 6.1254, lon: 102.2381 },
+      { name: 'Terengganu – Keropok Lekor', lat: 5.3290, lon: 103.1370 },
+      { name: 'Sabah – Sang Nyuk Mee', lat: 5.9804, lon: 116.0735 }
+    ].forEach(function (p) {
+      L.marker([p.lat, p.lon]).addTo(markers).bindPopup("<strong>" + p.name + "</strong>");
+    });
+
+    var __lastPos = null;
+    var __lastPosTime = 0;
+
+    window.addEventListener("load", function () {
+      if (!navigator.geolocation) {
+        console.log("Geolocation not supported.");
+        return;
+      }
+      var opts = { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 };
+      navigator.geolocation.getCurrentPosition(
+        function (pos) {
+          __lastPos = pos;
+          __lastPosTime = Date.now();
+          console.log("Location permission granted immediately", pos.coords);
+        },
+        function (err) {
+          console.log("Location permission denied or unavailable", err);
+        },
+        opts
+      );
+    });
+
+    // Search and Nearby functions (保留你原本页面里的版本)
+    function searchOnMap() {
+      var inputEl = document.getElementById("mapSearchInput");
+      var keyword = (inputEl ? inputEl.value : "").trim();
+      if (!keyword) {
+        alert("Please enter a food name or keyword.");
+        if (inputEl) inputEl.focus();
+        return;
+      }
+      var url = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(keyword);
+      window.open(url, "_blank");
+    }
+
+    function openNearbyFood() {
+      if (!navigator.geolocation) {
+        alert("Geolocation is not supported by this browser.");
+        return;
+      }
+      var win = window.open("about:blank", "_blank");
+      var options = { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 };
+
+      navigator.geolocation.getCurrentPosition(
+        function (pos) {
+          var lat = pos.coords.latitude;
+          var lng = pos.coords.longitude;
+
+          markers.clearLayers();
+          L.marker([lat, lng]).addTo(markers).bindPopup("You are here").openPopup();
+          map.setView([lat, lng], 15);
+
+          var inputEl = document.getElementById("mapSearchInput");
+          var keyword = inputEl ? inputEl.value.trim() : "";
+          if (!keyword) keyword = "street food";
+
+          var url = "https://www.google.com/maps/search/" + encodeURIComponent(keyword) + "/@" + lat + "," + lng + ",15z";
+          if (win) {
+            win.location.href = url;
+          } else {
+            window.open(url, "_blank");
+          }
+        },
+        function (err) {
+          if (win && !win.closed) win.close();
+          alert("Location access denied. Cannot show nearby food.");
+
+          var inputEl = document.getElementById("mapSearchInput");
+          var keyword = inputEl ? inputEl.value.trim() : "";
+          var fallback = keyword
+            ? "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(keyword)
+            : "https://www.google.com/maps/search/?api=1&query=street%20food%20near%20me";
+          window.open(fallback, "_blank");
+        },
+        options
+      );
+    }
+
+    // 暴露到全局（你的按钮 onclick 用到）
+    window.searchOnMap = searchOnMap;
+    window.openNearbyFood = openNearbyFood;
+
+    // ============ Storage demo（仅使用课上基础 JS） ============
+    // 1) 记住上次搜索关键词（localStorage）
+    (function () {
+      var inputEl = document.getElementById("mapSearchInput");
+      var last = localStorage.getItem("lastKeyword") || "";
+      if (inputEl && last) inputEl.value = last;
+
+      // 包装现有 searchOnMap：先保存输入再调用原函数
+      var _origSearch = window.searchOnMap;
+      window.searchOnMap = function () {
+        var val = (document.getElementById("mapSearchInput") ? document.getElementById("mapSearchInput").value : "").trim();
+        if (val) localStorage.setItem("lastKeyword", val);
+        _origSearch();
+      };
+    })();
+
+    // 2) 本会话访问计数（sessionStorage）
+    (function () {
+      var n = Number(sessionStorage.getItem("locVisits") || 0) + 1;
+      sessionStorage.setItem("locVisits", String(n));
+      console.log("This session visits (Location page):", n);
+    })();
+
+    // 3) 简单 cookie：记住访问过 Location 页
+    (function () {
+      function setCookie(name, value, days) {
+        var d = new Date();
+        d.setTime(d.getTime() + (days*24*60*60*1000));
+        document.cookie = name + "=" + encodeURIComponent(value) + "; expires=" + d.toUTCString() + "; path=/";
+      }
+      if (document.cookie.indexOf("visitedLocation=") === -1) {
+        setCookie("visitedLocation", "yes", 30);
+      }
+    })();
+  </script>
+</body>
+</html>

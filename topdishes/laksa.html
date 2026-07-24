@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../nav.css">
+    <link rel="stylesheet" href="topdishes.css">
+    <style>
+        .listclr {
+            font-size: 30px;
+            color: lightcoral;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>About Asam Laksa</h1>
+    </header>
+
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <div class="sidebar" id="sidebar">
+        <a href="../index/index.html">Home</a>
+        <a href="../about/about.html">About</a>
+        <a href="../topdishes/topdishes.html">Top Dishes</a>
+        <a href="../gallery/gallery.html">Gallery</a>
+        <a href="../recipe/recipe.html">Recipe</a>
+        <a href="../location/location.html">Location</a>
+        <a href="../quiz/quiz.html">Quiz</a>
+        <a href="../contact/contact.html">Contact</a>
+        <a href="../event/event.html">Event</a>
+        <a href="../faqs/faqs.html">FAQs</a>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <h2 class="hd1">
+        <a href="topdishes.html" class="backlink">&larr; Back</a>
+        <span class="title-text">Background and History</span>
+    </h2>
+    <p class="word">
+        Asam Laksa is a famous Malaysian noodle soup known for its tangy, spicy, and aromatic flavor. The name "Asam"
+        means "sour" in Malay, referring to the tamarind (asam jawa) that gives the broth its signature sourness. The
+        dish features thick rice noodles served in a fish-based soup, usually made with mackerel, tamarind, lemongrass,
+        and chili paste, topped with fresh herbs and vegetables like cucumber, mint leaves, and pineapple.
+
+        <br><br>
+
+        Asam Laksa is most closely associated with Penang, where it is considered a must-try street food and a symbol of
+        the island’s multicultural heritage. The origins trace back to the Peranakan (Straits Chinese) and Malay
+        culinary influences, blending Chinese noodle traditions with Malay and Southeast Asian spices. Over time, it
+        became a popular comfort food across Malaysia, with regional variations in states like Kedah, Perlis, and
+        Sarawak.
+
+        <br><br>
+
+        Internationally, Penang Asam Laksa has gained recognition as one of the world’s best dishes, even making it to
+        CNN Travel’s list of top foods.
+
+        <br><br>
+    </p>
+    <h2 class="hd2">Price and Ingredient</h2>
+    <div class="ingredients-section">
+        <!-- Left: Ingredients -->
+        <div class="ingredients-list">
+            <p class="word-rate">Current <b>1 USD</b> to <b>MYR</b> rate: <span id="exchangeRate">Loading...</span></p>
+            <script src="exchangeRate.js"></script>
+
+            <p class="word1">
+                <br>
+                Basic price of asam laksa in:
+            </p>
+            <ul>
+                <ul><span class="listclr">Penang :-</span>
+                    <li>small bowl --> RM5 - RM7</li>
+                    <li>large bowl --> RM8 - RM10</li>
+                </ul>
+                <ul><span class="listclr">Kuala Lumpur :-</span>
+                    <li>small bowl --> RM7 - RM9</li>
+                    <li>large bowl --> RM10 - RM14</li>
+                </ul>
+                <ul><span class="listclr">Other States :-</span>
+                    <li>small bowl --> RM6 - RM7</li>
+                    <li>large bowl --> RM8 - RM9</li>
+                </ul>
+            </ul>
+
+            <p class="word1">
+                <br>The basic ingredients included:
+            </p>
+            <ul>
+                <li>Shredded mackerel</li>
+                <li>Laksa mint & common mint leaves</li>
+                <li>Sliced onions</li>
+                <li>Lemongrass</li>
+                <li>Belachan (<i>Malay shrimp paste</i>)</li>
+                <li>Pineapple slices</li>
+                <li>Shredded cucumber & shredded lettuce</li>
+                <li>Heh ko (<i>sweet shrimp paste</i> in Penang Hokkien)</li>
+                <li>Spicy pungent fish broth</li>
+            </ul>
+        </div>
+
+        <!-- Right: Image -->
+        <div class="ingredients-image">
+            <img src="food/asamlaksa2.jpg" alt="Asam Laksa 1" />
+            <img src="food/asamlaksa3.jpg" alt="Asam Laksa 2" />
+        </div>
+    </div>
+
+
+    <span class="word-rate">Tried this food? Give it a rating!<br /></span>
+    <div class="star-rating" onclick="saveRating(event)">
+        <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+        <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+        <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+        <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+        <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+    </div>
+
+    <p id="printmsg" class="word-rate"></p>
+
+    <script src="../whole.js"></script>
+    <script>
+        // Save rating when clicked
+        function saveRating(event) {
+            if (event.target.tagName === "INPUT") {
+                let rating3 = event.target.value;
+                sessionStorage.setItem("starRating3", rating3);
+                document.getElementById("printmsg").textContent =
+                    "Thanks for rating!😊😊 You gave " + rating3 + " stars.";
+            }
+        }
+
+        // Load rating when page reloads
+        window.onload = function () {
+            let savedRating = sessionStorage.getItem("starRating3");
+            if (savedRating) {
+                // Check the radio button that was saved
+                document.getElementById("star" + savedRating).checked = true;
+                document.getElementById("printmsg").textContent =
+                    "Welcome back! You previously rated " + savedRating + " stars.";
+            }
+        }
+    </script>
+
+</body>
+<footer>
+    <p>&copy; 2025 Explore Malaysian Street Food. All Rights Reserved.</p>
+</footer>

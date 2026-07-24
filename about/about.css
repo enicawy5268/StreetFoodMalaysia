@@ -1,0 +1,674 @@
+/* Reset & basic setup */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #fdf6e3; 
+  color: #222222; /* Dark text for contrast */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* Header */
+header {
+  background-color: #fff8dc; /* warm beige */
+  padding: 20px;
+  text-align: center;
+  border-bottom: 2px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* stays above content */
+}
+
+header h1 {
+  color: #8b0000; /* dark red */
+  font-size: 2.5rem;
+}
+
+/* Navigation */
+nav {
+  background-color: #f5deb3; /* light wheat color */
+  padding: 10px;
+  text-align: center;
+  position: sticky;
+  top: 104px; /* push below header */
+  z-index: 999;
+}
+
+nav a {
+  color: #8b4513; /* saddle brown */
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #000000;
+}
+
+/* Main content area */
+main {
+  padding: 20px;
+}
+
+section {
+  margin-bottom: 40px;
+}
+
+/* Make body and html full height */
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Main content should expand to fill space */
+main {
+  flex: 1;
+}
+
+/* Footer styling */
+footer {
+  background-color: #e85c1e;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+
+
+/* Headings */
+h2 {
+  font-family: 'Playfair Display', serif;
+  color: #b22222; /* firebrick red */
+}
+
+
+h3 {
+  color: #a0522d; /* sienna */
+  margin-top: 20px;
+}
+
+/* Paragraphs & text */
+p {
+  margin-bottom: 15px;
+}
+
+/* List styling */
+ul {
+  list-style: disc;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 10px auto;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Form inputs */
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Back to Top Button */
+#backToTop {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 99;
+  font-size: 20px;
+  border: none;
+  outline: none;
+  background-color: #b22222;
+  color: white;
+  cursor: pointer;
+  padding: 12px 16px;
+  border-radius: 50%;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  display: none; /* hidden by default */
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+#backToTop:hover {
+  background-color: #8b1a1a;
+  transform: scale(1.1);
+}
+
+
+/* Footer */
+footer {
+  background-color: #fff8dc;
+  color: #666;
+  text-align: center;
+  padding: 15px;
+  font-size: 0.9rem;
+  border-top: 1px solid #eee;
+  position: relative;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2rem;
+  }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+  }
+
+  nav a {
+    margin: 8px 0;
+  }
+}
+
+/* Layout for about section */
+.about-section .about-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+/* Make left image column narrower */
+.about-section .image-grid {
+  flex: 0 0 40%; /* take 40% width instead of 50% */
+}
+
+/* Make text column wider and center vertically */
+.about-section .text {
+  flex: 0 0 55%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Bigger headings with underline */
+.about-section .text h2 {
+  font-size: 2.5rem; /* bigger title */
+  font-weight: bold;
+  color: #b22222;
+  border-bottom: 3px solid #b22222;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+/* Bigger paragraph text */
+.about-section .text p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+}
+
+/* Image side */
+.about-section .image {
+  flex: 1;
+  min-width: 280px;
+  animation: fadeInSlide 1s ease forwards;
+  opacity: 0;
+}
+
+/* Animate on load */
+@keyframes fadeInSlide {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.about-section {
+  display: flex;
+  align-items: center; /* vertically centers text */
+  gap: 30px;
+}
+
+.about-section img {
+  width: 300px; /* make image smaller */
+  height: auto;
+  border-radius: 10px; /* optional rounded corners */
+}
+
+.about-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centers text vertically */
+}
+
+.about-text h2 {
+  font-size: 2rem; /* bigger titles */
+  margin-bottom: 10px;
+}
+
+.about-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+
+/* Layout container */
+.about-section .about-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Image grid on left */
+.image-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  min-width: 250px;
+  animation: fadeInGrid 1.2s ease forwards;
+  opacity: 0;
+}
+
+/* Text area on right */
+.text {
+  flex: 1;
+  min-width: 280px;
+  animation: slideInText 1s ease forwards;
+  opacity: 0;
+}
+
+/* Animation keyframes */
+@keyframes fadeInGrid {
+  0% {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInText {
+  0% {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Simple styling for the top banner */
+#visitBanner {
+  background-color: #ffe599;
+  color: #333;
+  text-align: center;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Main layout: split screen half-half */
+.about-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+/* Make image + text each take 50% */
+.image-grid,
+.text {
+  flex: 1 1 50%;
+  box-sizing: border-box;
+}
+
+/* Ensure image grid doesn't overflow */
+.image-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  justify-items: center;
+  animation: fadeInGrid 1.2s ease forwards;
+  opacity: 0;
+  padding: 10px;
+  max-width: 100%;
+}
+
+/* Staggered layout */
+.image-grid img:nth-child(1) {
+  grid-column: 1 / 3;
+  justify-self: center;
+  width: 70%;
+  height: 200px;
+}
+
+.image-grid img:nth-child(2),
+.image-grid img:nth-child(3) {
+  width: 100%;
+  height: 180px;
+}
+
+.image-grid img:nth-child(4) {
+  grid-column: 1 / 3;
+  justify-self: center;
+  width: 70%;
+  height: 200px;
+}
+
+.image-grid img {
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Text content */
+.text {
+  padding: 10px 20px;
+  animation: slideInText 1s ease forwards;
+  opacity: 0;
+}
+
+/* Animations */
+@keyframes fadeInGrid {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInText {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Responsive: stack vertically on small screens */
+@media (max-width: 768px) {
+  .about-content {
+    flex-direction: column;
+  }
+
+  .image-grid,
+  .text {
+    flex: 1 1 100%;
+  }
+
+  .image-grid img:nth-child(1),
+  .image-grid img:nth-child(4) {
+    width: 100%;
+  }
+}
+
+.framed-section {
+  border: 2px solid #b22222;       /* red frame */
+  border-radius: 10px;             /* rounded corners */
+  padding: 20px;                   /* space inside frame */
+  margin: 20px auto;               /* space outside frame */
+  max-width: 900px;                /* limit width for neatness */
+  background-color: #fff8f0;       /* soft background */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* subtle shadow */
+}
+
+
+/* Timeline Section */
+.timeline-section {
+  background-color: #fffef8;
+  padding: 60px 20px;
+}
+
+.timeline-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.timeline::after {
+  content: '';
+  position: absolute;
+  width: 4px;
+  background-color: #e74c3c;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -2px;
+}
+
+/* Each timeline item */
+.timeline-item {
+  padding: 20px 30px;
+  position: relative;
+  width: 50%;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: -10px;
+  background-color: #e74c3c;
+  border-radius: 50%;
+  top: 20px;
+  z-index: 1;
+}
+
+/* Alternate sides */
+.timeline-item.left {
+  left: 0;
+  text-align: right;
+}
+
+.timeline-item.left::before {
+  right: -10px;
+}
+
+.timeline-item.right {
+  left: 50%;
+  text-align: left;
+}
+
+.timeline-item.right::before {
+  left: -10px;
+}
+
+/* Content box */
+.timeline-item .content {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.timeline-item .content h3 {
+  margin-top: 0;
+  color: #b22222;
+}
+
+.timeline-item .content p {
+  margin: 0;
+  color: #333;
+}
+
+/* Responsive (stacked) */
+@media (max-width: 768px) {
+  .timeline::after {
+    left: 8px;
+  }
+
+  .timeline-item {
+    width: 100%;
+    padding-left: 40px;
+    padding-right: 25px;
+  }
+
+  .timeline-item.left, .timeline-item.right {
+    left: 0;
+    text-align: left;
+  }
+
+  .timeline-item::before {
+    left: 0;
+  }
+}
+
+.timeline-item {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.timeline-item.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-preview {
+  background-image: url('../images/about-bg.jpg'); /* path to your image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 60px 20px;
+  color: #fff; /* light text for contrast */
+  position: relative;
+}
+
+/* Optional: Add a soft overlay for better text visibility */
+.about-preview::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* dark overlay */
+  z-index: 0;
+}
+
+/* Ensure content appears above overlay */
+.about-preview-content {
+  position: relative;
+  z-index: 1;
+}
+
+.fun-facts {
+  background-color: #f5deb3;
+  padding: 40px 20px;
+  text-align: center;
+  border: 4px solid #b22222; /* full border */
+}
+
+.fun-facts h2 {
+  display: inline-block;
+  border-bottom: 3px solid #b22222; /* underline for the title */
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+
+.facts-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.fact {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #8b0000;
+}
+
+.fact p {
+  font-size: 1rem;
+  color: #333;
+}
+
+.team-section {
+  padding: 40px 20px;
+  background-color: #fff8dc;
+  text-align: center;
+}
+
+.team-section h2 {
+  color: #b22222;
+  margin-bottom: 30px;
+}
+
+.team-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.team-member {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  max-width: 200px;
+  transition: transform 0.3s ease;
+}
+
+.team-member:hover {
+  transform: translateY(-5px);
+}
+
+.team-member img {
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+}
+
+.team-member h3 {
+  margin-top: 10px;
+  color: #8b0000;
+}
+
+.team-member p {
+  color: #333;
+  font-size: 0.9rem;
+}

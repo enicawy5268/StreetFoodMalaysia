@@ -1,0 +1,72 @@
+/* Cookie popup container */
+.cookie-popup {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 400px;
+    background-color: #fff8e1;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    text-align: center;
+    display: none; /* hidden initially */
+    z-index: 9999;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+/* Header of the popup */
+.cookie-popup h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+/* Paragraph text */
+.cookie-popup p {
+  font-size: 14px;
+  margin-bottom: 20px;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Buttons container */
+.cookie-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* Accept and Reject buttons */
+.cookie-buttons button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.cookie-accept {
+  background-color: #4caf50;
+  color: white;
+}
+
+.cookie-accept:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+.cookie-reject {
+  background-color: #f44336;
+  color: white;
+}
+
+.cookie-reject:hover {
+  background-color: #e53935;
+  transform: scale(1.05);
+}

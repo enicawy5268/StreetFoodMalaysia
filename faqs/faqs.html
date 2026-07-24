@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FAQs | Malaysian Street Food</title>
+  <link rel="stylesheet" href="faq.css">
+  <link rel="stylesheet" href="../nav.css">
+</head>
+<body>
+  <header>
+    <h1>Frequently Asked Questions</h1>
+  </header>  
+  
+  <button class="menu-toggle" id="menuToggle">☰</button>
+
+  
+    <div class="sidebar" id="sidebar">
+        <a href="../index/index.html">Home</a>
+        <a href="../about/about.html">About</a>
+        <a href="../topdishes/topdishes.html">Top Dishes</a>
+        <a href="../gallery/gallery.html">Gallery</a>
+        <a href="../recipe/recipe.html">Recipe</a>
+        <a href="../location/location.html">Location</a>
+        <a href="../quiz/quiz.html">Quiz</a>
+        <a href="../contact/contact.html">Contact</a>
+        <a href="../event/event.html">Event</a>
+        <a href="../faqs/faqs.html">FAQs</a>
+    </div>
+
+    
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Search Box -->
+  <input type="text" id="faqSearch" placeholder="Search FAQ..." onkeyup="searchFAQ()">
+
+  <div class="faq-container">
+    <div class="faq-item">
+      <div class="faq-question">🍜 What is Malaysian street food?</div>
+      <div class="faq-answer">
+        Malaysian street food is a fusion of Malay, Chinese, and Indian flavors, commonly found in hawker stalls and night markets.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">🌶️ Is Malaysian street food spicy?</div>
+      <div class="faq-answer">
+        Yes, many dishes are spicy, but most stalls can adjust the spice level to suit your preference.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">💰 How much does street food usually cost?</div>
+      <div class="faq-answer">
+        Street food in Malaysia is very affordable, typically ranging from RM3 to RM10 per dish.
+      </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">🥡 Can I get vegetarian options?</div>
+        <div class="faq-answer">
+            Yes! Dishes like roti canai, vegetarian nasi lemak, and stir-fried noodles are available in vegetarian versions.
+      </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">🕒 What time are street food stalls usually open?</div>
+        <div class="faq-answer">
+            Many stalls open in the evening and operate until late at night, while some morning markets serve breakfast dishes.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">🍹 What drinks are popular with street food?</div>
+        <div class="faq-answer">
+            Teh Tarik (pulled tea), fresh sugarcane juice, and coconut water are some of the most popular drinks.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">🌍 Where can I find the best street food in Malaysia?</div>
+        <div class="faq-answer">
+            Famous spots include Jalan Alor in Kuala Lumpur, Gurney Drive in Penang, and Jonker Street in Melaka.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">🥢 Do I need to bring my own utensils?</div>
+        <div class="faq-answer">
+            No, stalls usually provide chopsticks, spoons, and forks. Some even use eco-friendly disposable options.
+        </div>
+    </div>
+
+    <div class="faq-item">
+        <div class="faq-question">🛵 Can I order Malaysian street food online?</div>
+        <div class="faq-answer">
+            Yes! Many stalls are now available on food delivery apps like GrabFood and Foodpanda.
+        </div>
+    </div>
+
+    <p id="noResultMessage" style="display:none; color:red; font-weight:bold;">
+        No solution found
+    </p>
+  </div>
+
+  <footer>
+    &copy; 2025 Malaysian Street Food. All rights reserved.
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button onclick="scrollToTop()" id="backToTop">↑</button>
+
+  <script>
+    function searchFAQ() {
+        let input = document.getElementById("faqSearch").value.toLowerCase();
+        let faqs = document.getElementsByClassName("faq-item");
+        let found = false;
+
+        for (let i = 0; i < faqs.length; i++) {
+            let question = faqs[i].getElementsByClassName("faq-question")[0].innerText.toLowerCase();
+            let answer = faqs[i].getElementsByClassName("faq-answer")[0].innerText.toLowerCase();
+
+            if (question.includes(input) || answer.includes(input)) {
+                faqs[i].style.display = "block";
+                found = true;
+            } else {
+                faqs[i].style.display = "none";
+            }
+        }
+
+        let message = document.getElementById("noResultMessage");
+        if (!found) {
+            message.style.display = "block";
+        } else {
+            message.style.display = "none";
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        let questions = document.getElementsByClassName("faq-question");
+
+        for (let i = 0; i < questions.length; i++) {
+            questions[i].addEventListener("click", function () {
+            let answer = this.nextElementSibling;
+
+            if (answer.style.display === "block") {
+                answer.style.display = "none";
+            } else {
+                answer.style.display = "block";
+            }
+        });
+        }
+    });
+
+    // Back to Top
+    window.onscroll = function () {
+      let btn = document.getElementById("backToTop");
+      if (window.scrollY > 100) { 
+        btn.style.display = "block";
+      } else {
+        btn.style.display = "none";
+      }
+    };
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  </script>
+
+  <script src="../whole.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../nav.css">
+    <link rel="stylesheet" href="topdishes.css">
+</head>
+
+<body>
+    <header>
+        <h1>About Nasi Lemak</h1>
+    </header>
+
+    <button class="menu-toggle" id="menuToggle">☰</button>
+    <div class="sidebar" id="sidebar">
+        <a href="../index/index.html">Home</a>
+        <a href="../about/about.html">About</a>
+        <a href="../topdishes/topdishes.html">Top Dishes</a>
+        <a href="../gallery/gallery.html">Gallery</a>
+        <a href="../recipe/recipe.html">Recipe</a>
+        <a href="../location/location.html">Location</a>
+        <a href="../quiz/quiz.html">Quiz</a>
+        <a href="../contact/contact.html">Contact</a>
+        <a href="../event/event.html">Event</a>
+        <a href="../faqs/faqs.html">FAQs</a>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <h2 class="hd1">
+        <a href="topdishes.html" class="backlink">&larr; Back</a>
+        <span class="title-text">Background and History</span>
+    </h2>
+    <p class="word">
+        Nasi lemak is a dish originating in Malay cuisine that consists of rice cooked in coconut milk and pandan leaf.
+        It is commonly found in Malaysia, where it is considered the national dish. It is also a native dish in
+        neighbouring areas with significant ethnic Malay populations, such as Singapore and Southern Thailand. In
+        Indonesia, it can be found in parts of Sumatra, especially the Malay regions of Riau, Riau Islands, and
+        Medan. It is considered an essential dish for a typical Malay-style breakfast. Traditionally, it is served with
+        sambal (spicy chili paste), fried anchovies (ikan bilis), peanuts, cucumber slices, and boiled egg.
+
+        <br><br>
+
+        Nasi lemak can also be found in the Bangsamoro region of Mindanao, prepared by Filipino Moros, as well as in
+        Australia's external territories of Christmas Island and the Cocos (Keeling) Islands.
+
+        <br><br>
+
+        History and background
+        Nasi lemak was mentioned as early as 1875 in a French–Malay dictionary compiled by Pierre-Etienne-Lazare
+        Favre, a Roman Catholic missionary based on the Malay peninsula, and in a book titled The Circumstances of
+        Malay Life, written by Richard Olaf Winstedt in 1909. With roots in Malay culture and cuisine, the name
+        of the dish in Malay literally means "fat rice" but is taken in this context to mean "rich", or
+        "creamy". This is derived from the cooking process, which involves soaking the rice in coconut cream and
+        steaming the mixture. The addition of pandan leaves give the rice its distinct flavour.
+
+        <br><br>
+
+        Nasi lemak is traditionally wrapped in banana leaves.
+        Traditionally, nasi lemak is wrapped and served in banana leaves, together with a hot spicy sauce (sambal) and
+        various garnishes, including fresh cucumber slices, fried anchovies (ikan bilis), roasted peanuts, and
+        hard-boiled or fried eggs.
+
+        <br><br>
+
+        As a more substantial meal, nasi lemak may also be served with an additional protein dish such as ayam goreng
+        (fried chicken), sambal sotong (cuttlefish in chili), small fried fish, cockles, and rendang daging (beef stewed
+        in coconut milk and spices). Other accompaniments include stir-fried water convolvulus (kangkong)
+        and spicy pickled vegetable salad (acar).
+
+        <br><br>
+    </p>
+    <h2 class="hd2">Price and Ingredient</h2>
+    <div class="ingredients-section">
+        <!-- Left: Ingredients -->
+        <div class="ingredients-list">
+            <p class="word-rate">Current <b>1 USD</b> to <b>MYR</b> rate: <span id="exchangeRate">Loading...</span></p>
+            <script src="exchangeRate.js"></script>
+
+            <p class="word1">
+                <br>Basic price of Nasi Lemak:
+            </p>
+            <ul>
+                <li>without any side dishes --> RM2 - RM3</li>
+                <li>with side dishes (eg. fried chicken) --> RM8 - RM11</li>
+            </ul>
+
+            <p class="word1">
+                <br>
+                The basic ingredients included:
+            </p>
+            <ul>
+                <li>rice cooked in coconut milk</li>
+                <li>boiled eggs</li>
+                <li>sambal</li>
+                <li>fried dried anchovies (<i>ikan bilis</i>)</li>
+                <li>slices of cucumber</li>
+                <li>peanuts</li>
+            </ul>
+
+            <p class="word1">
+                <br>
+                Additional toppings:
+            </p>
+            <ul>
+                <li>fried chicken</li>
+                <li>prawn/squid sambal</li>
+                <li>curry chicken and potato chunks</li>
+                <li>rendang chicken/beef</li>
+                <li>chili kampung fish</li>
+            </ul>
+        </div>
+
+        <!-- Right: Image -->
+        <div class="ingredients-image">
+            <img src="food/nasilemak2.webp" alt="Nasi Lemak 1st" />
+            <img src="food/nasilemak3.jpg" alt="Nasi Lemak 2nd" />
+        </div>
+    </div>
+
+
+    <span class="word-rate">Tried this food? Give it a rating!<br /></span>
+    <div class="star-rating" onclick="saveRating(event)">
+        <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+        <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+        <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+        <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+        <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+    </div>
+
+    <p id="printmsg" class="word-rate"></p>
+
+    <script src="../whole.js"></script>
+    <script>
+        // Save rating when clicked
+        function saveRating(event) {
+            if (event.target.tagName === "INPUT") {
+                let rating2 = event.target.value;
+                sessionStorage.setItem("starRating2", rating2);
+                document.getElementById("printmsg").textContent =
+                    "Thanks for rating!😊😊 You gave " + rating2 + " stars.";
+            }
+        }
+
+        // Load rating when page reloads
+        window.onload = function () {
+            let savedRating = sessionStorage.getItem("starRating2");
+            if (savedRating) {
+                // Check the radio button that was saved
+                document.getElementById("star" + savedRating).checked = true;
+                document.getElementById("printmsg").textContent =
+                    "Welcome back! You previously rated " + savedRating + " stars.";
+            }
+        }
+    </script>
+</body>
+<footer>
+    <p>&copy; 2025 Explore Malaysian Street Food. All Rights Reserved.</p>
+</footer>

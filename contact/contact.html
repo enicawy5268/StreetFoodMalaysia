@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | Malaysian Street Food</title>
+  <link rel="stylesheet" href="contact.css">
+  <link rel="stylesheet" href="../nav.css">
+</head>
+<body>
+
+  <header>
+    <h1>Malaysian Street Food</h1>
+  </header>
+
+  <!-- menu -->
+    <button class="menu-toggle" id="menuToggle">☰</button>
+
+    <!-- Navigation -->
+    <div class="sidebar" id="sidebar">
+        <a href="../index/index.html">Home</a>
+        <a href="../about/about.html">About</a>
+        <a href="../topdishes/topdishes.html">Top Dishes</a>
+        <a href="../gallery/gallery.html">Gallery</a>
+        <a href="../recipe/recipe.html">Recipe</a>
+        <a href="../location/location.html">Location</a>
+        <a href="../quiz/quiz.html">Quiz</a>
+        <a href="../contact/contact.html">Contact</a>
+        <a href="../event/event.html">Event</a>
+        <a href="../faqs/faqs.html">FAQs</a>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+  <main>
+    <section class="contact-section">
+      <!-- Left: Form -->
+      <div class="contact-form">
+        <h2>Get In Touch</h2>
+        <p>You are more than welcome to send us a message to express your thoughts!</p>
+        <form id="contactForm" action="#" method="post">
+          <input type="text" name="name" placeholder="Full Name" required>
+
+          <!-- Phone number with format validation -->
+          <input type="tel" name="phone" 
+                 placeholder="01X-XXXXXXX / 01X-XXXXXXXX"
+                 pattern="01[0-9]-\d{7,8}"
+                 title="Format: 01X-XXXXXXX or 01X-XXXXXXXX" required>
+
+          <input type="email" name="email" placeholder="Email" required>
+          <textarea name="message" placeholder="Message" rows="5" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+
+      <!-- Right: Map -->
+      <div class="map-container">
+        <iframe 
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.224888261439!2d101.1325568!3d4.3348416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31cb1d573f9aabf3%3A0x28cc06c069e40dce!2sUniversiti%20Tunku%20Abdul%20Rahman%20(UTAR)!5e0!3m2!1sen!2smy!4v1691680976404!5m2!1sen!2smy" 
+          width="100%" 
+          height="400" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Malaysian Street Food. All rights reserved.
+  </footer>
+
+  <!-- JavaScript for saving form data in localStorage -->
+  <script>
+    const form = document.getElementById("contactForm");
+
+    // Load saved data when page loads
+    window.onload = () => {
+      form.name.value = localStorage.getItem("contact_name") || "";
+      form.phone.value = localStorage.getItem("contact_phone") || "";
+      form.email.value = localStorage.getItem("contact_email") || "";
+      form.message.value = localStorage.getItem("contact_message") || "";
+    };
+
+    // Save data whenever user types
+    form.name.addEventListener("input", () => {
+      localStorage.setItem("contact_name", form.name.value);
+    });
+    form.phone.addEventListener("input", () => {
+      localStorage.setItem("contact_phone", form.phone.value);
+    });
+    form.email.addEventListener("input", () => {
+      localStorage.setItem("contact_email", form.email.value);
+    });
+    form.message.addEventListener("input", () => {
+      localStorage.setItem("contact_message", form.message.value);
+    });
+
+    // Show success message and clear storage when form is submitted
+    form.addEventListener("submit", (e) => {
+      e.preventDefault(); // prevent real submission
+      alert("✅ Your message has been received! Thank you for contacting us.");
+      
+      // clear localStorage
+      localStorage.removeItem("contact_name");
+      localStorage.removeItem("contact_phone");
+      localStorage.removeItem("contact_email");
+      localStorage.removeItem("contact_message");
+
+      // reset form fields
+      form.reset();
+    });
+  </script>
+
+  <script src="../whole.js"></script>
+
+</body>
+</html>
