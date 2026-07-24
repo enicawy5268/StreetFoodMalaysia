@@ -1,26 +1,16 @@
 # 🍜 Street Food in Malaysia
-
-> A web application designed to introduce the rich and diverse street food culture of Malaysia to overseas visitors.
-> 
-> **[Live Demo: 点击这里查看我的网页]((https://enicawy5268.github.io/StreetFoodMalaysia/))**
+A web application designed to introduce the rich and diverse street food culture of Malaysia to overseas visitors.
 
 ## ✨ Features
 *   **Cultural Introduction:** Introduces a variety of authentic Malaysian street foods.
 *   **Location Based:** Makes it easy to discover and locate street food anytime and anywhere.
 
 ## 📸 Screenshots
-*(这里你可以放 1-2 张你网页的精美截图)*
-![Screenshot 1](在这里放图片的链接)
-![Screenshot 2](在这里放图片的链接)
+<img width="1883" height="2284" alt="image" src="https://github.com/user-attachments/assets/d2a3b29c-2685-4bb2-910c-d0563690dc0f" />
+<img width="1885" height="1545" alt="image" src="https://github.com/user-attachments/assets/efddcc42-0dc3-421e-88ee-e04acbffa57a" />
 
 ## 🛠️ Built With
 *   HTML5
 *   CSS
 *   JavaScript
 
-## 🚀 Getting Started
-To get a local copy up and running, follow these simple steps.
-
-### 1. Clone the repo
-```bash
-git clone [https://github.com/你的用户名/streetfoodmls.git](https://github.com/你的用户名/streetfoodmls.git)
